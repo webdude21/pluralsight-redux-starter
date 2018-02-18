@@ -75,7 +75,7 @@ class CourseApi {
         }
 
         if (course.id) {
-          const existingCourseIndex = courses.findIndex(a => a.id == course.id);
+          const existingCourseIndex = courses.findIndex(a => a.id === course.id);
           courses.splice(existingCourseIndex, 1, course);
         } else {
           //Just simulating creation here.
@@ -94,9 +94,7 @@ class CourseApi {
   static deleteCourse(courseId) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        const indexOfCourseToDelete = courses.findIndex(course => {
-          course.id == courseId;
-        });
+        const indexOfCourseToDelete = courses.findIndex(course => course.id === courseId);
         courses.splice(indexOfCourseToDelete, 1);
         resolve();
       }, delay);
