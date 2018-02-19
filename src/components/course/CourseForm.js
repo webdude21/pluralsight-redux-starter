@@ -3,7 +3,7 @@ import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
 
 const CourseForm = ({ course, allAuthors, onSave, onChange, loading, errors }) => {
-  const { title, authorId, category, length } = course;
+  let { title, authorId, category, length } = course;
 
   return (
     <form>
@@ -13,7 +13,7 @@ const CourseForm = ({ course, allAuthors, onSave, onChange, loading, errors }) =
         label="Title"
         value={title}
         onChange={onChange}
-        error={title}
+        error={errors.title}
       />
       <SelectInput
         name="authorId"
@@ -22,21 +22,21 @@ const CourseForm = ({ course, allAuthors, onSave, onChange, loading, errors }) =
         defaultOption="Select Author"
         options={allAuthors}
         onChange={onChange}
-        error={authorId}
+        error={errors.authorId}
       />
       <TextInput
         name="category"
         label="Category"
         value={category}
         onChange={onChange}
-        error={category}
+        error={errors.category}
       />
       <TextInput
         name="length"
         label="Length"
         value={length}
         onChange={onChange}
-        error={length}
+        error={errors.length}
       />
       <input
         type="submit"
