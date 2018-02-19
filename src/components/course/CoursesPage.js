@@ -8,13 +8,13 @@ import CourseList from "./CourseList";
 import { browserHistory } from "react-router";
 
 class CoursePage extends Component {
-  static redirectToAddCoursePage() {
-    browserHistory.push('/course');
-  }
-
   constructor(props, context) {
     super(props, context);
     bindAllMethods(this);
+  }
+
+  static redirectToAddCoursePage() {
+    browserHistory.push('/course');
   }
 
   render() {

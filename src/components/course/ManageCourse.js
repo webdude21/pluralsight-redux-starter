@@ -18,15 +18,24 @@ class ManageCoursePage extends Component {
     bindAllMethods(this);
   }
 
+  componentWillReceiveProps({ course }) {
+    if (this.props.course && this.props.course.id === course.id) {
+      return;
+    }
+
+    this.setState({ course: Object.assign({}, course) });
+  }
+
   handleSave(event) {
     event.preventDefault();
     this.props.actions.saveCourse(this.state.course);
+    this.context.router.push('/courses');
   }
 
   handleChange({ target: { name, value } }) {
     let course = Object.assign({}, this.state.course);
     course[name] = value;
-    return this.setState({course});
+    return this.setState({ course });
   }
 
   render() {
@@ -50,9 +59,21 @@ ManageCoursePage.propTypes = {
   authors: PropTypes.array.isRequired
 };
 
+ManageCoursePage.contextTypes = {
+  router: PropTypes.object
+};
 
-function mapStateToProps(state, ownProps) {
-  const course = { id: '', watchHref: '', title: '', authorId: '', length: '', category: '' };
+function getCourseById(courses, id) {
+  const courseIndex = courses.findIndex(value => value.id === id);
+  return courses[courseIndex];
+}
+
+function mapStateToProps(state, { params: { id } }) {
+  let course = { id: '', watchHref: '', title: '', authorId: '', length: '', category: '' };
+
+  if (id) {
+    course = getCourseById(state.courses, id) || course;
+  }
 
   const authorsForDropDown = state.authors.map(author => {
     return { value: author.id, text: `${author.firstName} ${author.lastName}` };
