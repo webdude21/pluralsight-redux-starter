@@ -15,7 +15,7 @@ export function updateCourseSuccess(course) {
 
 export function saveCourse(course) {
   return function (dispatch, getState) {
-    const created = course.id !== undefined;
+    const created = course.id === undefined;
     const appropriateAction = created ? createCourseSuccess : updateCourseSuccess;
 
     return courseApi
