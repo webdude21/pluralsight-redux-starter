@@ -1,17 +1,17 @@
 import React, { PropTypes } from 'react';
 import { Link } from "react-router";
 
-const CourseListRow = ({ course }) => (
+const CourseListRow = ({ course: { watchHref, id, title, authorId, category, length } }) => (
   <tr>
     <td>
-      <a href={course.watchHref} target="_blank">Watch</a>
+      <a href={watchHref} target="_blank">Watch</a>
     </td>
     <td>
-      <Link to={'/course/' + course.id}>{course.title}</Link>
+      <Link to={'/course/' + id}>{title}</Link>
     </td>
-    <td>{course.authorId}</td>
-    <td>{course.category}</td>
-    <td>{course.length}</td>
+    <td>{authorId}</td>
+    <td>{category}</td>
+    <td>{length}</td>
   </tr>
 );
 
