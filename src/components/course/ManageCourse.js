@@ -18,11 +18,15 @@ class ManageCoursePage extends Component {
     bindAllMethods(this);
   }
 
-  handleSave() {
-    this.props.actions.createCourse(this.state.course);
+  handleSave(event) {
+    event.preventDefault();
+    this.props.actions.saveCourse(this.state.course);
   }
 
-  handleChange() {
+  handleChange({ target: { name, value } }) {
+    let course = Object.assign({}, this.state.course);
+    course[name] = value;
+    return this.setState({course});
   }
 
   render() {
