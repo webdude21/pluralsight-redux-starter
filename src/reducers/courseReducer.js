@@ -6,8 +6,8 @@ const initialCourse = initialState.courses;
 
 const actionMap = {
   [LOAD_COURSES_SUCCESS]: (state = initialCourse, action) => action.courses,
-  [UPDATE_COURSE_SUCCESS]: (state = initialCourse, {course}) => [...state.filter(crs => crs.id !== course.id), Object.assign({}, course)],
-  [CREATE_COURSE]: (state = initialState, action) => [...state, Object.assign({}, action.course)]
+  [UPDATE_COURSE_SUCCESS]: (state = initialCourse, { course }) => [...state.filter(crs => crs.id !== course.id), Object.assign({}, course)],
+  [CREATE_COURSE]: (state = initialCourse, { course }) => [...state, Object.assign({}, course)]
 };
 
 export default createReducer(actionMap);
