@@ -14,6 +14,23 @@ export function updateCourseSuccess(course) {
   return { type: actionTypes.UPDATE_COURSE_SUCCESS, course };
 }
 
+export function deleteCourseSuccess(course) {
+  return { type: actionTypes.DELETE_COURSE_SUCCESS, course };
+}
+
+export function deleteCourse(course) {
+  return function (dispatch, getState) {
+
+    dispatch(beginAjaxCall());
+
+    return courseApi
+      .deleteCourse(course.id)
+      .then(course => dispatch(deleteCourseSuccess(course)))
+      .catch(err => handleError(dispatch, err));
+  };
+}
+
+
 export function saveCourse(course) {
   return function (dispatch, getState) {
     const created = course.id === undefined;
