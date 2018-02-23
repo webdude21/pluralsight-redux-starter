@@ -13,7 +13,14 @@ describe('Managed Course Page', () => {
       course: { id: '', watchHref: '', title: '', authorId: '', length: '', category: '' }
     };
 
-    const wrapper = mount(<ManageCoursePage {...props}/>);
+    const context = {
+      router: {
+        setRouteLeaveHook: () => {}
+      }
+    };
+
+    const page = <ManageCoursePage {...props}/>;
+    const wrapper = mount(page);
     const saveButton = wrapper.find('input').last();
     expect(saveButton.prop('type')).toBe('submit');
     expect(saveButton.prop('value')).toBe('Save');

@@ -1,12 +1,23 @@
-import { CREATE_COURSE, LOAD_COURSES_SUCCESS, UPDATE_COURSE_SUCCESS } from "../actions/actionTypes";
+import {
+  COURSE_SORT,
+  CREATE_COURSE,
+  DELETE_COURSE_SUCCESS,
+  LOAD_COURSES_SUCCESS,
+  UPDATE_COURSE_SUCCESS
+} from "../actions/actionTypes";
 import createReducer from "../util/ReducerCreator";
 import initialState from "./initialState";
 
 const initialCourse = initialState.courses;
 
+let equal = (a, b) => a === b || a.id === b.id;
+let sortComparator = (sortKey) => (a, b) => a[sortKey].localeCompare(b[sortKey]);
+
 const actionMap = {
   [LOAD_COURSES_SUCCESS]: (state = initialCourse, action) => action.courses,
-  [UPDATE_COURSE_SUCCESS]: (state = initialCourse, { course }) => [...state.filter(crs => crs.id !== course.id), Object.assign({}, course)],
+  [COURSE_SORT]: (state = initialCourse, { key }) => state.slice().sort(sortComparator(key)),
+  [DELETE_COURSE_SUCCESS]: (state = initialCourse, { course }) => [...state.filter(crs => !equal(course, crs))],
+  [UPDATE_COURSE_SUCCESS]: (state = initialCourse, { course }) => [...state.filter(crs => !equal(course, crs)), Object.assign({}, course)],
   [CREATE_COURSE]: (state = initialCourse, { course }) => [...state, Object.assign({}, course)]
 };
 

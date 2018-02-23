@@ -2,11 +2,11 @@ import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 import App from './components/App';
 import HomePage from "./components/home/HomePage";
-import AboutPage from "./components/about/AboutPage";
 import CoursesPage from "./components/course/CoursesPage";
 import ManageCoursePageConnected from "./components/course/ManageCourse";
 import ManageAuthorPage from "./components/author/ManageAuthorPage";
 import AuthorsPage from "./components/author/AuthorsPage";
+import NotFoundPage from "./components/not-found/NotFoundPage";
 
 export default (
   <Route path="/" component={App}>
@@ -17,6 +17,6 @@ export default (
     <Route path="authors" component={AuthorsPage}/>
     <Route path="author" component={ManageAuthorPage}/>
     <Route path="author/:id" component={ManageAuthorPage}/>
-    <Route path="about" component={AboutPage}/>
+    <Route path="*" component={NotFoundPage}/>
   </Route>
 );

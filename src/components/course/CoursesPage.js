@@ -6,31 +6,45 @@ import { bindActionCreators } from "redux";
 import * as courseActions from "../../actions/courseActions";
 import CourseList from "./CourseList";
 import { browserHistory } from "react-router";
+import toastr from 'toastr';
 
 class CoursePage extends Component {
-
-  static redirectToAddCoursePage() {
-    browserHistory.push('/course');
-  }
-
   constructor(props, context) {
     super(props, context);
     bindAllMethods(this);
   }
 
+  handleCourseDelete(course) {
+    this.props.actions.deleteCourse(course)
+      .then(() => toastr.success(`"${course.title}" successfully deleted`));
+  }
+
+  handleSort(sortKey) {
+    this.props.actions.sortCourses(sortKey);
+  }
+
+  redirectToAddCoursePage() {
+    browserHistory.push('/course');
+  }
+
   render() {
     const { courses } = this.props;
+    let header = <h1>Courses</h1>;
+
+    if (courses.length) {
+      header = <h1>Courses # {courses.length && courses.length}</h1>;
+    }
 
     return (
       <div>
-        <h1>Courses</h1>
+        {header}
         <input
           type="submit"
           value="Add Course"
           className="btn btn-primary"
-          onClick={CoursePage.redirectToAddCoursePage}
+          onClick={this.redirectToAddCoursePage}
         />
-        <CourseList courses={courses}/>
+        <CourseList courses={courses} deleteCourse={this.handleCourseDelete} headerClick={this.handleSort}/>
       </div>
     );
   }

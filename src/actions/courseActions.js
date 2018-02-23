@@ -18,14 +18,17 @@ export function deleteCourseSuccess(course) {
   return { type: actionTypes.DELETE_COURSE_SUCCESS, course };
 }
 
+export function sortCourses(key) {
+  return { type: actionTypes.COURSE_SORT, key };
+}
+
 export function deleteCourse(course) {
   return function (dispatch, getState) {
-
     dispatch(beginAjaxCall());
 
     return courseApi
       .deleteCourse(course.id)
-      .then(course => dispatch(deleteCourseSuccess(course)))
+      .then(() => dispatch(deleteCourseSuccess(course)))
       .catch(err => handleError(dispatch, err));
   };
 }

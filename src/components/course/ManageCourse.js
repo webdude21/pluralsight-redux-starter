@@ -21,6 +21,13 @@ export class ManageCoursePage extends Component {
     bindAllMethods(this);
   }
 
+  componentDidMount() {
+    if (!this.context.router) {
+      return;
+    }
+    this.context.router.setRouteLeaveHook(this.props.route, this.handleUnsavedChanges);
+  }
+
   componentWillReceiveProps({ course }) {
     if (this.props.course && this.props.course.id === course.id) {
       return;
@@ -32,7 +39,7 @@ export class ManageCoursePage extends Component {
   handleSave(event) {
     event.preventDefault();
 
-    if (!this.courseFormIsValue()) {
+    if (!this.courseFormIsValid()) {
       return;
     }
 
@@ -42,9 +49,7 @@ export class ManageCoursePage extends Component {
       .actions
       .saveCourse(this.state.course)
       .then(this.handleSaveSuccess)
-      .catch(err => {
-        this.setState({ saving: false });
-      });
+      .catch(err => this.setState({ saving: false }));
   }
 
   handleSaveSuccess(payload) {
@@ -59,7 +64,7 @@ export class ManageCoursePage extends Component {
     return this.setState({ course });
   }
 
-  courseFormIsValue() {
+  courseFormIsValid() {
     let formIsValid = true;
     let errors = {};
 
@@ -70,6 +75,20 @@ export class ManageCoursePage extends Component {
 
     this.setState({ errors: errors });
     return formIsValid;
+  }
+
+  isFormIsDirty() {
+    const courseFromProps = this.props.course;
+    const courseFromState = this.state.course;
+
+    return Object.keys(courseFromProps)
+      .some(key => courseFromProps[key] !== courseFromState[key]);
+  }
+
+  handleUnsavedChanges() {
+    if (this.isFormIsDirty()) {
+      return 'You have unsaved information, are you sure you want to leave this page?';
+    }
   }
 
   render() {
@@ -91,7 +110,8 @@ export class ManageCoursePage extends Component {
 ManageCoursePage.propTypes = {
   actions: PropTypes.object.isRequired,
   course: PropTypes.object.isRequired,
-  authors: PropTypes.array.isRequired
+  authors: PropTypes.array.isRequired,
+  route: PropTypes.object
 };
 
 ManageCoursePage.contextTypes = {
