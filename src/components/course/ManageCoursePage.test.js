@@ -13,12 +13,6 @@ describe('Managed Course Page', () => {
       course: { id: '', watchHref: '', title: '', authorId: '', length: '', category: '' }
     };
 
-    const context = {
-      router: {
-        setRouteLeaveHook: () => {}
-      }
-    };
-
     const page = <ManageCoursePage {...props}/>;
     const wrapper = mount(page);
     const saveButton = wrapper.find('input').last();
