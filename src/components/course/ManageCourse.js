@@ -49,7 +49,7 @@ export class ManageCoursePage extends Component {
       .actions
       .saveCourse(this.state.course)
       .then(this.handleSaveSuccess)
-      .catch(err => this.setState({ saving: false }));
+      .catch(() => this.setState({ saving: false }));
   }
 
   handleSaveSuccess(payload) {
@@ -81,7 +81,8 @@ export class ManageCoursePage extends Component {
     const courseFromProps = this.props.course;
     const courseFromState = this.state.course;
 
-    return Object.keys(courseFromProps)
+    return Object
+      .keys(courseFromProps)
       .some(key => courseFromProps[key] !== courseFromState[key]);
   }
 

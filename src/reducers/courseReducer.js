@@ -1,7 +1,7 @@
 import {
   COURSE_SORT,
   CREATE_COURSE,
-  DELETE_COURSE_SUCCESS,
+  DELETE_COURSE,
   LOAD_COURSES_SUCCESS,
   UPDATE_COURSE_SUCCESS
 } from "../actions/actionTypes";
@@ -16,7 +16,7 @@ let sortComparator = (sortKey) => (a, b) => a[sortKey].localeCompare(b[sortKey])
 const actionMap = {
   [LOAD_COURSES_SUCCESS]: (state = initialCourse, action) => action.courses,
   [COURSE_SORT]: (state = initialCourse, { key }) => state.slice().sort(sortComparator(key)),
-  [DELETE_COURSE_SUCCESS]: (state = initialCourse, { course }) => [...state.filter(crs => !equal(course, crs))],
+  [DELETE_COURSE]: (state = initialCourse, { course }) => [...state.filter(crs => !equal(course, crs))],
   [UPDATE_COURSE_SUCCESS]: (state = initialCourse, { course }) => [...state.filter(crs => !equal(course, crs)), Object.assign({}, course)],
   [CREATE_COURSE]: (state = initialCourse, { course }) => [...state, Object.assign({}, course)]
 };

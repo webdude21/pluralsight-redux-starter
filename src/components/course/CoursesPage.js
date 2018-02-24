@@ -15,8 +15,8 @@ class CoursePage extends Component {
   }
 
   handleCourseDelete(course) {
-    this.props.actions.deleteCourse(course)
-      .then(() => toastr.success(`"${course.title}" successfully deleted`));
+    toastr.success(`"${course.title}" successfully deleted`);
+    this.props.actions.deleteCourse(course);
   }
 
   handleSort(sortKey) {
