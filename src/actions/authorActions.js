@@ -6,6 +6,12 @@ export function loadAuthorsSuccess(authors) {
   return { type: actionTypes.LOAD_AUTHORS_SUCCESS, authors };
 }
 
+export function deleteAuthor(author) {
+  AuthorApi.deleteAuthor(author.id);
+
+  return { type: actionTypes.DELETE_AUTHOR, author };
+}
+
 export function loadAuthors() {
   return function (dispatch) {
 

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import AuthorListRow from "./AuthorListRow";
 
-const AuthorList = ({ authors }) => (
+const AuthorList = ({ authors, deleteAuthor }) => (
   <table className="table">
     <thead>
     <tr>
@@ -11,15 +11,14 @@ const AuthorList = ({ authors }) => (
     </tr>
     </thead>
     <tbody>
-    {authors.map(author =>
-      <AuthorListRow key={author.id} author={author}/>
-    )}
+    {authors.map(author => <AuthorListRow key={author.id} deleteAuthor={deleteAuthor} author={author}/>)}
     </tbody>
   </table>
 );
 
 AuthorList.propTypes = {
-  authors: PropTypes.array.isRequired
+  authors: PropTypes.array.isRequired,
+  deleteAuthor: PropTypes.func.isRequired
 };
 
 export default AuthorList;
