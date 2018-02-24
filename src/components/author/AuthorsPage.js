@@ -6,6 +6,7 @@ import { bindActionCreators } from "redux";
 import * as authorActions from "../../actions/authorActions";
 import AuthorList from "./AuthorList";
 import toastr from "toastr";
+import { browserHistory } from "react-router";
 
 class AuthorsPage extends Component {
   constructor(props, context) {
@@ -19,6 +20,10 @@ class AuthorsPage extends Component {
     this.props.actions.deleteAuthor(author);
   }
 
+  redirectToCreateAuthorPage() {
+    browserHistory.push('/author');
+  }
+
   render() {
     return (
       <div>
@@ -27,6 +32,7 @@ class AuthorsPage extends Component {
           type="submit"
           value="Add Author"
           className="btn btn-primary"
+          onClick={this.redirectToCreateAuthorPage}
         />
         <AuthorList deleteAuthor={this.handleAuthorDelete} authors={this.props.authors}/>
       </div>

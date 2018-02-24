@@ -52,15 +52,14 @@ export class ManageCoursePage extends Component {
       .catch(() => this.setState({ saving: false }));
   }
 
-  handleSaveSuccess(payload) {
+  handleSaveSuccess() {
     this.setState({ saving: false });
     toastr.success(`"${this.state.course.title}" successfully saved`);
     this.context.router.push('/courses');
   }
 
   handleChange({ target: { name, value } }) {
-    let course = Object.assign({}, this.state.course);
-    course[name] = value;
+    const course = Object.assign({}, this.state.course, { [name]: value });
     return this.setState({ course });
   }
 
@@ -119,20 +118,16 @@ ManageCoursePage.contextTypes = {
   router: PropTypes.object
 };
 
-function getCourseById(courses, id) {
-  const courseIndex = courses.findIndex(value => value.id === id);
-  return courses[courseIndex];
-}
-
-function mapStateToProps(state, { params: { id } }) {
+function mapStateToProps({ courses, authors }, { params: { id } }) {
   let course = { id: '', watchHref: '', title: '', authorId: '', length: '', category: '' };
 
   if (id) {
-    course = getCourseById(state.courses, id) || course;
+    const courseById = courses.find(value => value.id === id);
+    course = courseById || course;
   }
 
   return {
-    authors: authorsFormattedForDropdown(state.authors),
+    authors: authorsFormattedForDropdown(authors),
     course: course
   };
 }

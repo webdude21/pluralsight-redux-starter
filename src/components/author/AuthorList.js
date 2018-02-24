@@ -6,6 +6,7 @@ const AuthorList = ({ authors, deleteAuthor }) => (
     <thead>
     <tr>
       <th>&nbsp;</th>
+      <th>&nbsp;</th>
       <th>First Name</th>
       <th>Last Name</th>
     </tr>
