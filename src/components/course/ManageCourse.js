@@ -53,7 +53,6 @@ export class ManageCoursePage extends Component {
   }
 
   handleSaveSuccess() {
-    this.setState({ saving: false });
     toastr.success(`"${this.state.course.title}" successfully saved`);
     this.context.router.push('/courses');
   }
@@ -86,7 +85,7 @@ export class ManageCoursePage extends Component {
   }
 
   handleUnsavedChanges() {
-    if (this.isFormIsDirty()) {
+    if (this.isFormIsDirty() && !this.state.saving) {
       return 'You have unsaved information, are you sure you want to leave this page?';
     }
   }

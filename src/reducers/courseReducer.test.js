@@ -11,7 +11,7 @@ describe('Course Reducer', () => {
 
     const newCourse = { title: 'Data Structures' };
 
-    const actual = courseReducer(initialState, actions.updateCourseSuccess(newCourse));
+    const actual = courseReducer(initialState, actions.createCourseSuccess(newCourse));
 
     expect(actual.length).toBe(3);
 

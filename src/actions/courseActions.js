@@ -25,8 +25,8 @@ export function deleteCourse(course) {
 
 
 export function saveCourse(course) {
-  return function (dispatch, getState) {
-    const created = course.id === undefined;
+  return function (dispatch) {
+    const created = !course.id;
     const appropriateAction = created ? createCourseSuccess : updateCourseSuccess;
 
     dispatch(beginAjaxCall());

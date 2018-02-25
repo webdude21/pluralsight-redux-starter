@@ -1,6 +1,6 @@
 import {
   COURSE_SORT,
-  CREATE_COURSE,
+  CREATE_COURSE_SUCCESS,
   DELETE_COURSE,
   LOAD_COURSES_SUCCESS,
   UPDATE_COURSE_SUCCESS
@@ -18,7 +18,7 @@ const actionMap = {
   [COURSE_SORT]: (state = initialCourse, { key }) => state.slice().sort(sortComparator(key)),
   [DELETE_COURSE]: (state = initialCourse, { course }) => [...state.filter(crs => !idEqual(course, crs))],
   [UPDATE_COURSE_SUCCESS]: (state = initialCourse, { course }) => [...state.filter(crs => !idEqual(course, crs)), Object.assign({}, course)],
-  [CREATE_COURSE]: (state = initialCourse, { course }) => [...state, Object.assign({}, course)]
+  [CREATE_COURSE_SUCCESS]: (state = initialCourse, { course }) => [...state, Object.assign({}, course)]
 };
 
 export default createReducer(actionMap);
