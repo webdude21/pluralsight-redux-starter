@@ -11,6 +11,9 @@ import configureStore from './store/configureStore';
 import { Provider } from "react-redux";
 import { loadCourses } from "./actions/courseActions";
 import { loadAuthors } from "./actions/authorActions";
+import toastr from 'toastr';
+
+toastr.options.escapeHtml = true;
 
 const store = configureStore();
 store.dispatch(loadCourses());
