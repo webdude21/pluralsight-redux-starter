@@ -1,13 +1,10 @@
 import React from 'react';
 
-export default class AboutPage extends React.Component {
+const AboutPage = () => (
+  <div>
+    <h1>About</h1>
+    <p>The app uses react</p>
+  </div>
+);
 
-  render() {
-    return (
-      <div>
-        <h1>About</h1>
-        <p>The app uses react</p>
-      </div>
-    );
-  }
-}
+export default AboutPage;

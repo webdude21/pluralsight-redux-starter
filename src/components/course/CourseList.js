@@ -3,10 +3,16 @@ import React, { PropTypes } from 'react';
 import CourseListRow from './CourseListRow';
 
 const CourseList = ({ courses, deleteCourse, headerClick }) => {
-
   if (!courses.length) {
     return null;
   }
+
+  let createSortHandler = (columnName) => () => headerClick(columnName);
+
+  let titleClick = createSortHandler("title");
+  let authorIdClick = createSortHandler("authorId");
+  let categoryClick = createSortHandler("category");
+  let lengthClick = createSortHandler("length");
 
   return (
     <table className="table">
@@ -14,10 +20,10 @@ const CourseList = ({ courses, deleteCourse, headerClick }) => {
       <tr>
         <th>&nbsp;</th>
         <th>&nbsp;</th>
-        <th onClick={headerClick.bind(null, "title")}>Title</th>
-        <th onClick={headerClick.bind(null, "authorId")}>Author</th>
-        <th onClick={headerClick.bind(null, "category")}>Category</th>
-        <th onClick={headerClick.bind(null, "length")}>Length</th>
+        <th onClick={titleClick}>Title</th>
+        <th onClick={authorIdClick}>Author</th>
+        <th onClick={categoryClick}>Category</th>
+        <th onClick={lengthClick}>Length</th>
       </tr>
       </thead>
       <tbody>

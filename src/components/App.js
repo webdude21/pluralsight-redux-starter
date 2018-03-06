@@ -18,7 +18,7 @@ App.propTypes = {
   loading: PropTypes.bool
 };
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
     loading: state.ajaxCallsInProgress > 0
   };
